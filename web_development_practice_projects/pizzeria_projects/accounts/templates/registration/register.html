@@ -1,0 +1,13 @@
+{% extends "pizzas/base.html" %}
+
+{% block title %}Pizza Shop: Register{% endblock title %}
+
+{% block header %}Welcome To Pizza Shop: Register Page{% endblock header %}
+
+{% block content %}
+<form action="{% url 'accounts:register' %}" method="post">
+    {% csrf_token %}
+    {{form.as_div}}
+    <button type="submit" style="color: darkblue;">Register</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "pizzas/base.html" %}
+
+{% block title %}Pizza Shop:Add Pizza{% endblock title %}
+{% block header %}New Pizza{% endblock header %}
+
+{% block content %}
+<form action="{% url 'pizzas:add_pizza' %}" method="post">
+    {% csrf_token %}
+    {{form.as_div}}
+    <button type="submit" >Add Pizza</button>
+</form>
+{% endblock content %}

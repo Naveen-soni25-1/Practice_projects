@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Pizza Shop{% endblock title %}</title>
+    <style>
+          .delete-btn {
+            background-color: red;
+            color: white;
+            border: 2px solid black;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        body {
+            background-color: lightblue;
+            margin: 0;
+            padding: 8px 12px;
+        }
+        header {
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        nav a {
+            text-decoration: none;
+            font-weight: bold;
+            color: darkblue;
+        }
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .auth-links a {
+            color: brown;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-links">
+        <a href="{% url 'accounts:register' %}">Register</a>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+            <span class="navbar-text" style="font-size: 20px; color: brown;">Hello, {{user.username|title}} </span>
+            </li>
+        {% else %}
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:register' %}">Register</a></li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+           <form action="{% url 'accounts:logout' %}" method='post'>
+                {% csrf_token %}
+                <button name='submit' class='btn btn-outline-secondary btn-sm'>Log out</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <header>
+        <h1>{% block header %}Welcome To Pizza Shop{% endblock header %}</h1>
+        <nav>
+            {% block nav %}
+            <ul>
+                <li><a href="{% url 'pizzas:index' %}">Home</a></li>
+                <li><a href="{% url 'pizzas:menu' %}">Menu</a></li>
+            </ul>
+            {% endblock nav %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+</html>

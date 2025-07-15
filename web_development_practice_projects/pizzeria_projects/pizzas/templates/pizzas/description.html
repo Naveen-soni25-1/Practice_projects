@@ -1,0 +1,34 @@
+{% extends "pizzas/base.html" %}
+
+{% block title %}Pizza Shop: Menu{% endblock title %}
+
+{% block header %}Welcome To Pizza Shop{% endblock header %}
+
+{% block content %}
+<div style="background-color: lightblue; padding: 20px;">
+   <form action="{% url 'pizzas:delete_pizza' pizza.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" style="background-color: red;">Delete</button>
+   </form>
+  <hr style="border: 1px solid black">
+    <h2 style="text-align: left;">Pizza: {{pizza.name|title}} - {{rating.stars}}⭐</h2>
+    <p style="text-align: left;"><strong>Description: {{pizza.description}}</strong></p>
+    <p style="text-align: left;"><strong>Comments: {{rating.comment}}</strong></p>
+    <h3 style="text-align: left;">Toppings:</h3>
+<div>
+  <ul>
+  {% for entry in toppings %}
+    <li style="text-align: left;">
+      <p><strong>{{ entry.date_added|date:"M d, Y H:i" }}</strong> ;<a href="{% url 'pizzas:edit_topping' entry.id %}">Edit Toppings</a></p>
+      <p>{{ entry.name|title }} :- {{ entry.quantity }}</p>
+    </li>
+  {% empty %}
+    <li>No Topping Is Available at The Moment.</li>
+  {% endfor %}
+  </ul> 
+</div>
+    <hr style="border: 1px solid black">
+    <a href="{% url 'pizzas:add_topping' pizza.id %}" style="text-align: center;">Add Topping</a>
+
+</div>
+{% endblock content %}

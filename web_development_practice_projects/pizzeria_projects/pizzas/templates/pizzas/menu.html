@@ -1,0 +1,26 @@
+{% extends "pizzas/base.html" %}
+
+{% block title %}Pizza Shop: Menu{% endblock title %}
+
+{% block header %}Welcome To Pizza Shop{% endblock header %}
+
+{% block content %}
+<div style="background-color: lightblue; padding: 20px;">
+    <h2 style="text-align: center;">Menu Page</h2>
+    <h3 style="text-align: center;">Explore the different variety of tasty Pizzas.</h3>
+    <hr style="border: 1px solid black">
+
+    <ul style="list-style-type: disc;">
+        {% if pizzas %}
+            {% for pizza in pizzas %}
+                <li style="text-align: left; padding: 5px;">
+                    <a href="{% url 'pizzas:pizza' pizza.id %}">{{ pizza|title }}</a></li>
+            {% endfor %}
+        {% else %}
+            <li style="text-align: left; padding: 5px;">No Pizza Is Available at The Moment.</li>
+        {% endif %}
+    </ul>
+    <hr style="border: 1px solid black">
+    <a href="{% url 'pizzas:add_pizza' %}" style="color: brown; text-align: center;"><strong>Add New Pizza</strong></a>
+</div>
+{% endblock content %}

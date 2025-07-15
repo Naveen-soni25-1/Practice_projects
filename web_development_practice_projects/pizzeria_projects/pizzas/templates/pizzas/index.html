@@ -1,0 +1,15 @@
+{% extends "pizzas/base.html" %}
+
+{% block title %}Pizza Shop{% endblock title %}
+
+{% block header %}Welcome To Pizza Shop{% endblock header %}
+
+{% block content %}
+<div style="background-color: lightblue; padding: 20px;">
+    <h2 style="text-align: center;">Explore the different variety of tasty Pizzas.</h2>
+    <p style="text-align: left;">
+        Check out our 
+        <a href="{% url 'pizzas:menu' %}">Menu</a>
+    </p>
+</div>
+{% endblock content %}
